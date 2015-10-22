@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+
+var docopt = require('docopt').docopt;
+
+var install = require('../lib/install');
+var promptForToken = require('../lib/token');
+var github = require('../lib/github');
+
+var usage = fs.readFileSync(path.join(__dirname, './usage.txt'), {encoding: 'utf8'});
+var pckg = require('../package');
+
+var opts = docopt(usage, {version: pckg.version});
+var username = opts['<username>'];
+var project = opts['<project>'];
+var archiveFilename = opts['<filename>'];
+// This is the path to the application inside of the archive file
+var appDirPath = opts['<path-to-CLI-app>'];
+
+promptForToken(checkAcceptToken, function(token) {
+	github.downloadLatest(token, username, project, archiveFilename, function(err, tmpFile) {
+		if (err) {
+			process.stderr.write('Unable to download file ' + err.toString() + '\n');
+		} else {
+			install(tmpFile, appDirPath);
+		}
+	});
+});
+
+function checkAcceptToken (token, cb) {    
+    github.getReleases(token, username, project, function (releases) {
+        cb(releases.length > 0);
+    }, function (err, statusCode) {
+        process.stdout.write('Invalid personal auth token.');
+        cb(false);
+    });
+}

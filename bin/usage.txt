@@ -1,0 +1,34 @@
+Download and install the latest version of a binary application,
+which is released via a private repo on github.
+
+Usage:
+	upgrade-private-app <username> <project> <filename> <path-to-CLI-app>
+	upgrade-private-app -h | --help
+	upgrade-private-app --version
+
+username	Github username or organization
+project		Github repository
+filename	Filename for the released archive file.
+
+		Example: sekrit-build.tgz
+
+path-to-CLI-app	Path to the binary application you want to install.
+
+		Example: _output/darwin/amd64/sekrit-app is the full path
+		inside of sekrit-build.tgz to a CLI app named sekrit-app
+
+-h --help	Show this screen.
+--version	Show version.
+
+This is kind of a hack and several assumptions are baked in.
+Patches welcome ;)
+
+Assumptions: the filename must be a compressed tar file, the CLI app must already be installed, the CLI app filename must be the same as the end of the appDirPath.
+
+Recommended usage is to wrap this in a shell alias.
+
+Example bash set:
+
+	alias upgrade-sekrit-app="upgrade-private-app exampleco sekrit-app sekrit-build.tgz _output/darwin/amd64/sekrit-app"
+
+After installing that in ~/.bash_profile, now you can just use upgrade-sekrit-app form the CLI.

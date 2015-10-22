@@ -1,0 +1,17 @@
+{
+  "name": "upgrade-private-app",
+  "version": "0.1.0",
+  "description": "CLI for downloading a released binary application from a private repo",
+  "main": "bin/upgrade-private-app",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo 'Nice try'"
+  },
+  "author": "Austin King <austink@porch.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "docopt": "^0.6.2"
+  }
+}
