@@ -1,6 +1,6 @@
 {
   "name": "upgrade-private-app",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "CLI for downloading a released binary application from a private repo",
   "main": "bin/upgrade-private-app",
   "repository": {
