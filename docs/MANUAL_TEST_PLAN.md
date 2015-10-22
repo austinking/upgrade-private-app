@@ -1,5 +1,8 @@
 # Manual Test Plan
 
+cat /dev/null > ~/local/bin/sekrit-app
+chmod +x ~/local/bin/sekrit-app
+
 1) no credentials
 2) bad token
 3) good token
@@ -15,7 +18,7 @@
 
 1) re-uses good credentials
 
-1) edit ~/.pcl_upgrade_token to make bad credentials
+1) edit ~/.upgrade_private_app_token to make bad credentials
 2) good token
 3) Yes, persist
 
